@@ -1,7 +1,6 @@
 <!-- LINT.IfChange -->
 <html>
   <head>
-    <title>YouTube Web Embedded Player iframe API</title>
     <style>
       .video {
         position: absolute;
@@ -174,8 +173,9 @@
       function onYouTubeIframeAPIReady() {
 
         let defaultConfig = {
-          videoId: "gac_video",
+          videoId: videoId,
           //playerVars: playerVars,
+          width: "100%",
           playerVars: {
             autoplay: 1,
             controls: 0,
@@ -183,9 +183,9 @@
             hl: "en",
             modestbranding: 0,
             rel: 1,
-            debugjs: 1,
             ps: "gac",
             dashmpd: "https://manifest.googlevideo.com/api/manifest/dash/expire/1700193747/ei/U3VWZdf9FvS5ir4PmbeKgA4/ip/2620:0:1006:18:b02b:2c35:eddb:b34e/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/48/vprv/1/pacing/0/mt/1700164622/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRgIhALVpZ31FHWSL7I0wOs7cMEG7e2I4g67CLjpuZ8zamk0fAiEAnZwTong30DaEi20EMjo2fvF-So0aBtzp1P4vpSIBd8w%3D/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRgIhANcnSumLBFjXyLBhphBwjQ0JmxJpTx8wTB0yVReLpQZcAiEAwtglofrFhKtg0_T0UuOuubk0NmPQLBEC4GGIBLYezSU%3D",
+            //dashmpd: "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
           },
           events: {
               'onReady': onPlayerReady,
@@ -238,4 +238,3 @@
   </body>
 </html>
 <!-- LINT.ThenChange(//depot/google3/video/youtube/web/embedded_player/appspot/pfp_test_appspot/templates/iframe_api_demo.html) -->
-
