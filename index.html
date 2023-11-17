@@ -155,8 +155,6 @@
               }
           }
 
-      let log = "Start<br>"
-
       // Set up iframes using API.
       const tag = document.createElement("script");
 
@@ -166,8 +164,6 @@
       tag.src = "https://www.youtube.com/iframe_api";
       const firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      document.getElementById("state").innerHTML = log;
 
       let player;
       function onYouTubeIframeAPIReady() {
@@ -213,28 +209,20 @@
     
         console.log("Creating new player", playerConfig)
         player = new YT.Player("player", playerConfig);
-        log += "Player created<br>"
-        document.getElementById("state").innerHTML = log;
       }
 
       function onPlayerReady(event) {
-
-        log += "Player ready:<br>"
-        document.getElementById("state").innerHTML = log;
-        console.log("onPlayerReady")
+        player.mute();
       }
 
       function onPlayerError(event) {
-        log += "Player error: " + event.data + "<br>"
-        document.getElementById("state").innerHTML = log;
       }
 
       function onPlayerStateChange(event) {
-        log += "Player state: " + event.data + "<br>"
-        document.getElementById("state").innerHTML = log;
       }
 
     </script>
   </body>
 </html>
 <!-- LINT.ThenChange(//depot/google3/video/youtube/web/embedded_player/appspot/pfp_test_appspot/templates/iframe_api_demo.html) -->
+
