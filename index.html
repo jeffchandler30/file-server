@@ -14,7 +14,6 @@
   </head>
   <body>
     <div id="player" class="video" frameborder="0"></div>
-    <!-- <div id="state"></div> -->
     </div>
     <script>
 
@@ -42,7 +41,7 @@
             modestbranding: 0,
             rel: 1,
             ps: "gac",
-            dashmpd: "https://manifest.googlevideo.com/api/manifest/dash/expire/1700193747/ei/U3VWZdf9FvS5ir4PmbeKgA4/ip/2620:0:1006:18:b02b:2c35:eddb:b34e/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/48/vprv/1/pacing/0/mt/1700164622/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRgIhALVpZ31FHWSL7I0wOs7cMEG7e2I4g67CLjpuZ8zamk0fAiEAnZwTong30DaEi20EMjo2fvF-So0aBtzp1P4vpSIBd8w%3D/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRgIhANcnSumLBFjXyLBhphBwjQ0JmxJpTx8wTB0yVReLpQZcAiEAwtglofrFhKtg0_T0UuOuubk0NmPQLBEC4GGIBLYezSU%3D",
+            dashmpd: "https://manifest.googlevideo.com/api/manifest/dash/expire/1700271348/ei/dKRXZd2qEoTlir4PkO6FkAs/ip/2601:640:8800:4980:1cf4:dc8c:759d:67d8/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/34/vprv/1/pacing/0/mt/1700242146/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRAIgWeBaPFy_19jyJkoMLkl5750wOhRb4WJhKGDJNarqvD8CIBKk25HH-I-yUyXvyq_HdWkeLDwZtsrCbRAuL6OuiNbM/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRAIgfNX0ObGNtXlFR5kmV17CZe_-8YmGQ8Kb7hMpVKlZ9D0CIH53Yf_LvAYL3q8eOQmoYkGs71K-PHffTmvW-Lu4FjpT",
           },
           events: {
               'onReady': onPlayerReady,
@@ -74,6 +73,10 @@
 
       function onPlayerReady(event) {
         player.mute();
+        player.loadVideoByPlayerVars({
+            "dashmpd": "https://manifest.googlevideo.com/api/manifest/dash/expire/1700271348/ei/dKRXZd2qEoTlir4PkO6FkAs/ip/2601:640:8800:4980:1cf4:dc8c:759d:67d8/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/34/vprv/1/pacing/0/mt/1700242146/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRAIgWeBaPFy_19jyJkoMLkl5750wOhRb4WJhKGDJNarqvD8CIBKk25HH-I-yUyXvyq_HdWkeLDwZtsrCbRAuL6OuiNbM/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRAIgfNX0ObGNtXlFR5kmV17CZe_-8YmGQ8Kb7hMpVKlZ9D0CIH53Yf_LvAYL3q8eOQmoYkGs71K-PHffTmvW-Lu4FjpT",
+            "videoId": "gac_video_id"
+        })
       }
 
       function onPlayerError(event) {
@@ -86,4 +89,3 @@
   </body>
 </html>
 <!-- LINT.ThenChange(//depot/google3/video/youtube/web/embedded_player/appspot/pfp_test_appspot/templates/iframe_api_demo.html) -->
-
