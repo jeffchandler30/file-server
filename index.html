@@ -2,18 +2,25 @@
 <html>
   <head>
     <style>
-      .video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%; /* 16:9 */
+      .video { 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+      }
+      .container { 
+        position: relative; 
+        width: 100%; 
+        height: 100%; 
+        overflow: hidden; 
       }
   </style>
   </head>
   <body>
-    <div id="player" class="video" frameborder="0"></div>
+    <div class="container">
+      <div id="player" class="video" frameborder="0"></div>
+    </div>
     </div>
     <script>
 
@@ -22,7 +29,12 @@
 
       let params = (new URL(document.location)).searchParams;
       let videoId = params.get("videoId");
+      let dashmpd = params.get("dashmpd");
+      let autoplay = params.get("autoplay");
+      let controls = params.get("controls");
+      let muted = params.get("muted");
 
+      console.log("Params: videoId", videoId, "dashmpd", dashmpd, "autoplay", autoplay, "controls", controls, "muted", muted)
       tag.src = "https://youtube.googleapis.com/iframe_api";
       const firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -33,15 +45,15 @@
         let defaultConfig = {
           videoId: videoId,
           width: "100%",
+          height: window.innerHeight,
           playerVars: {
-            autoplay: 1,
-            controls: 0,
+            autoplay: autoplay === 1 || autoplay === "1" || autoplay === true ? 1 : 0,
+            controls: controls === 1 || controls === "1" || controls === true ? 1 : 0,
             playsinline: 1,
             hl: "en",
             modestbranding: 0,
             rel: 1,
-            ps: "gac",
-            //dashmpd: "https://manifest.googlevideo.com/api/manifest/dash/expire/1700271348/ei/dKRXZd2qEoTlir4PkO6FkAs/ip/2601:640:8800:4980:1cf4:dc8c:759d:67d8/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/34/vprv/1/pacing/0/mt/1700242146/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRAIgWeBaPFy_19jyJkoMLkl5750wOhRb4WJhKGDJNarqvD8CIBKk25HH-I-yUyXvyq_HdWkeLDwZtsrCbRAuL6OuiNbM/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRAIgfNX0ObGNtXlFR5kmV17CZe_-8YmGQ8Kb7hMpVKlZ9D0CIH53Yf_LvAYL3q8eOQmoYkGs71K-PHffTmvW-Lu4FjpT",
+            dashmpd: dashmpd || undefined
           },
           events: {
               'onReady': onPlayerReady,
@@ -50,7 +62,6 @@
             }
         };
 
-        console.log("createOrUpdatePlayer", defaultConfig)
         createOrUpdatePlayer(defaultConfig);
       }
 
@@ -73,22 +84,26 @@
       }
 
       function onPlayerReady(event) {
-        player.mute();
-        console.log("Calling loadVideoByPlayerVars")
-
-        player.loadVideoByPlayerVars({
-            "dashmpd": "https://manifest.googlevideo.com/api/manifest/dash/expire/1700271348/ei/dKRXZd2qEoTlir4PkO6FkAs/ip/2601:640:8800:4980:1cf4:dc8c:759d:67d8/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/34/vprv/1/pacing/0/mt/1700242146/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRAIgWeBaPFy_19jyJkoMLkl5750wOhRb4WJhKGDJNarqvD8CIBKk25HH-I-yUyXvyq_HdWkeLDwZtsrCbRAuL6OuiNbM/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRAIgfNX0ObGNtXlFR5kmV17CZe_-8YmGQ8Kb7hMpVKlZ9D0CIH53Yf_LvAYL3q8eOQmoYkGs71K-PHffTmvW-Lu4FjpT",
-            "videoId": "gac_video_id"
-        })
+        console.log("onPlayerReady",  event.data)
+        if (muted) {
+          console.log("Calling mute");
+          player.mute();
+        }
+        if (autoplay) {
+          console.log("Calling playVideo");
+          player.playVideo();
+        }
       }
 
       function onPlayerError(event) {
+        console.log("onPlayerError",  event.data)
       }
 
       function onPlayerStateChange(event) {
+        console.log("onPlayerStateChange", event.data)
       }
 
     </script>
   </body>
 </html>
-<!-- LINT.ThenChange(//depot/google3/video/youtube/web/embedded_player/appspot/pfp_test_appspot/templates/iframe_api_demo.html) -->
+<!-- LINT.ThenChange(//depot/google3/video/youtube/web/embedded_player/appspot/pfp_test_appspot/templates/player.html) -->
