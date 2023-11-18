@@ -9,18 +9,12 @@
         width: 100%; 
         height: 100%; 
       }
-      .container { 
-        position: relative; 
-        width: 100%; 
-        height: 100%; 
-        overflow: hidden; 
-      }
   </style>
   </head>
   <body>
     <div class="container">
-      <div id="player" class="video" frameborder="0"></div>
-    </div>
+        <!-- <div>Hola</div> -->
+        <div id="player" class="video" frameborder="0"></div>
     </div>
     <script>
 
@@ -35,7 +29,7 @@
       let muted = params.get("muted");
 
       console.log("Params: videoId", videoId, "dashmpd", dashmpd, "autoplay", autoplay, "controls", controls, "muted", muted)
-      tag.src = "https://youtube.googleapis.com/iframe_api";
+      tag.src = "https://youtube.com/iframe_api";
       const firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -53,6 +47,7 @@
             hl: "en",
             modestbranding: 0,
             rel: 1,
+            ps: "gac",
             dashmpd: dashmpd || undefined
           },
           events: {
@@ -92,6 +87,13 @@
         if (autoplay) {
           console.log("Calling playVideo");
           player.playVideo();
+        }
+        if (dashmpd) {
+          console.log("Calling playVideo");
+          player.loadVideoByPlayerVars({
+            dashmpd: dashmpd,
+            videoId: "gac_video_id"
+          });
         }
       }
 
