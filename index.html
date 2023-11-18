@@ -74,6 +74,8 @@
 
       function onPlayerReady(event) {
         player.mute();
+        console.log("Calling loadVideoByPlayerVars")
+
         player.loadVideoByPlayerVars({
             "dashmpd": "https://manifest.googlevideo.com/api/manifest/dash/expire/1700271348/ei/dKRXZd2qEoTlir4PkO6FkAs/ip/2601:640:8800:4980:1cf4:dc8c:759d:67d8/id/3984000000000001/source/arts_and_culture/requiressl/yes/xpc/Eghoy9CdJnoBAQ%3D%3D/susc/gac/playback_host/rr5---sn-o097znsk.googlevideo.com/mh/N9/mm/31/mn/sn-o097znsk/ms/au/mv/m/mvi/5/pl/34/vprv/1/pacing/0/mt/1700242146/itag/0/sparams/expire,ei,ip,id,source,requiressl,xpc,susc,vprv,itag/sig/ANLwegAwRAIgWeBaPFy_19jyJkoMLkl5750wOhRb4WJhKGDJNarqvD8CIBKk25HH-I-yUyXvyq_HdWkeLDwZtsrCbRAuL6OuiNbM/lsparams/playback_host,mh,mm,mn,ms,mv,mvi,pl/lsig/AM8Gb2swRAIgfNX0ObGNtXlFR5kmV17CZe_-8YmGQ8Kb7hMpVKlZ9D0CIH53Yf_LvAYL3q8eOQmoYkGs71K-PHffTmvW-Lu4FjpT",
             "videoId": "gac_video_id"
